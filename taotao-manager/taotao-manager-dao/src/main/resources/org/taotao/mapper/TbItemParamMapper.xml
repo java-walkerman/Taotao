@@ -125,8 +125,8 @@
   <insert id="insert" parameterType="org.taotao.pojo.TbItemParam" >
     insert into tb_item_param (id, item_cat_id, created, 
       updated, param_data)
-    values (#{id,jdbcType=BIGINT}, #{itemCatId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
-      #{updated,jdbcType=TIMESTAMP}, #{paramData,jdbcType=LONGVARCHAR})
+    values (#{id,jdbcType=BIGINT}, #{itemCatId,jdbcType=BIGINT}, NOW(),NOW(),
+     #{paramData,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbItemParam" >
     insert into tb_item_param
@@ -155,10 +155,10 @@
         #{itemCatId,jdbcType=BIGINT},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+       NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="paramData != null" >
         #{paramData,jdbcType=LONGVARCHAR},
@@ -179,12 +179,9 @@
       </if>
       <if test="record.itemCatId != null" >
         item_cat_id = #{record.itemCatId,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
       <if test="record.paramData != null" >
         param_data = #{record.paramData,jdbcType=LONGVARCHAR},
@@ -197,9 +194,8 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update tb_item_param
     set id = #{record.id,jdbcType=BIGINT},
-      item_cat_id = #{record.itemCatId,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP},
+      item_cat_id = #{record.itemCatId,jdbcType=BIGINT}, 
+      updated = NOW(),
       param_data = #{record.paramData,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -208,9 +204,8 @@
   <update id="updateByExample" parameterType="map" >
     update tb_item_param
     set id = #{record.id,jdbcType=BIGINT},
-      item_cat_id = #{record.itemCatId,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+      item_cat_id = #{record.itemCatId,jdbcType=BIGINT}, 
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,12 +215,9 @@
     <set >
       <if test="itemCatId != null" >
         item_cat_id = #{itemCatId,jdbcType=BIGINT},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
       <if test="paramData != null" >
         param_data = #{paramData,jdbcType=LONGVARCHAR},
@@ -235,17 +227,15 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.taotao.pojo.TbItemParam" >
     update tb_item_param
-    set item_cat_id = #{itemCatId,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP},
+    set item_cat_id = #{itemCatId,jdbcType=BIGINT}, 
+      updated = NOW(),
       param_data = #{paramData,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.taotao.pojo.TbItemParam" >
     update tb_item_param
-    set item_cat_id = #{itemCatId,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
+    set item_cat_id = #{itemCatId,jdbcType=BIGINT}, 
+      updated = NOW()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

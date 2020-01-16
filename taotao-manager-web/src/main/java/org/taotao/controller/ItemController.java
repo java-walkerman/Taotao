@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.taotao.common.pojo.EasyUIDataGridResult;
+import org.taotao.common.result.JsonResult;
 import org.taotao.pojo.TbItem;
 import org.taotao.service.ItemService;
 
@@ -33,6 +34,19 @@ public class ItemController {
 	@ResponseBody
 	public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
 		return itemService.getItemList(page, rows);
+	}
+
+	/**
+	 * 添加商品 
+	 * @param item
+	 * @param desc
+	 * @return
+	 */
+	@RequestMapping(value="/item/save",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonResult<String> createItem(TbItem item, String desc) {
+
+		return itemService.createItem(item, desc);
 	}
 
 }

@@ -108,7 +108,7 @@
       created, updated)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{status,jdbcType=INTEGER}, #{sortOrder,jdbcType=INTEGER}, #{isParent,jdbcType=BIT}, 
-      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+      NOW(),NOW())
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbContentCategory" >
     insert into tb_content_category
@@ -158,10 +158,10 @@
         #{isParent,jdbcType=BIT},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+       NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
     </trim>
   </insert>
@@ -191,12 +191,9 @@
       </if>
       <if test="record.isParent != null" >
         is_parent = #{record.isParent,jdbcType=BIT},
-      </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     <if test="_parameter != null" >
@@ -211,8 +208,7 @@
       status = #{record.status,jdbcType=INTEGER},
       sort_order = #{record.sortOrder,jdbcType=INTEGER},
       is_parent = #{record.isParent,jdbcType=BIT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -234,12 +230,9 @@
       </if>
       <if test="isParent != null" >
         is_parent = #{isParent,jdbcType=BIT},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -250,9 +243,8 @@
       name = #{name,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       sort_order = #{sortOrder,jdbcType=INTEGER},
-      is_parent = #{isParent,jdbcType=BIT},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
+      is_parent = #{isParent,jdbcType=BIT}, 
+      updated = NOW()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

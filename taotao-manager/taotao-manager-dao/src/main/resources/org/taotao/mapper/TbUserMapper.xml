@@ -106,8 +106,7 @@
       phone, email, created, 
       updated)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{updated,jdbcType=TIMESTAMP})
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, NOW(), NOW() )
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbUser" >
     insert into tb_user
@@ -151,10 +150,10 @@
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+       NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
     </trim>
   </insert>
@@ -181,12 +180,9 @@
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     <if test="_parameter != null" >
@@ -199,9 +195,8 @@
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+      email = #{record.email,jdbcType=VARCHAR}, 
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,12 +215,9 @@
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -235,9 +227,8 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
+      email = #{email,jdbcType=VARCHAR}, 
+      updated = NOW()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

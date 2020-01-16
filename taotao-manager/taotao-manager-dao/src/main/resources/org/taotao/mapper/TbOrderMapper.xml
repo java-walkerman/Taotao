@@ -111,8 +111,8 @@
       shipping_code, user_id, buyer_message, 
       buyer_nick, buyer_rate)
     values (#{orderId,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR}, #{paymentType,jdbcType=INTEGER}, 
-      #{postFee,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, 
+      #{postFee,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, NOW(), 
+      NOW(), #{paymentTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, 
       #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, 
       #{shippingCode,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{buyerMessage,jdbcType=VARCHAR}, 
       #{buyerNick,jdbcType=VARCHAR}, #{buyerRate,jdbcType=INTEGER})
@@ -189,10 +189,10 @@
         #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="paymentTime != null" >
         #{paymentTime,jdbcType=TIMESTAMP},
@@ -250,11 +250,11 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.createTime != null" >
+<!--       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
+      </if> -->
       <if test="record.updateTime != null" >
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = NOW(),
       </if>
       <if test="record.paymentTime != null" >
         payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
@@ -297,9 +297,8 @@
       payment = #{record.payment,jdbcType=VARCHAR},
       payment_type = #{record.paymentType,jdbcType=INTEGER},
       post_fee = #{record.postFee,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}, 
+      update_time = NOW(),
       payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
       consign_time = #{record.consignTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},

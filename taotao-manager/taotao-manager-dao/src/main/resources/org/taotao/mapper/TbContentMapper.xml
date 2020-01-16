@@ -135,8 +135,8 @@
       updated, content)
     values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
       #{subTitle,jdbcType=VARCHAR}, #{titleDesc,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{pic,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{updated,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+      #{pic,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, NOW(),NOW(), 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbContent" >
     insert into tb_content
@@ -201,10 +201,10 @@
         #{pic2,jdbcType=VARCHAR},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -243,12 +243,9 @@
       </if>
       <if test="record.pic2 != null" >
         pic2 = #{record.pic2,jdbcType=VARCHAR},
-      </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -267,9 +264,8 @@
       title_desc = #{record.titleDesc,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       pic = #{record.pic,jdbcType=VARCHAR},
-      pic2 = #{record.pic2,jdbcType=VARCHAR},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP},
+      pic2 = #{record.pic2,jdbcType=VARCHAR}, 
+      updated = NOW(),
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -284,9 +280,8 @@
       title_desc = #{record.titleDesc,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       pic = #{record.pic,jdbcType=VARCHAR},
-      pic2 = #{record.pic2,jdbcType=VARCHAR},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+      pic2 = #{record.pic2,jdbcType=VARCHAR}, 
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -314,12 +309,9 @@
       </if>
       <if test="pic2 != null" >
         pic2 = #{pic2,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
@@ -335,9 +327,8 @@
       title_desc = #{titleDesc,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       pic = #{pic,jdbcType=VARCHAR},
-      pic2 = #{pic2,jdbcType=VARCHAR},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP},
+      pic2 = #{pic2,jdbcType=VARCHAR}, 
+      updated = NOW(),
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -349,9 +340,8 @@
       title_desc = #{titleDesc,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       pic = #{pic,jdbcType=VARCHAR},
-      pic2 = #{pic2,jdbcType=VARCHAR},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
+      pic2 = #{pic2,jdbcType=VARCHAR}, 
+      updated = NOW()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

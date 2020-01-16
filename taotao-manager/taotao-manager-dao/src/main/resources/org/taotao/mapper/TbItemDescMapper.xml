@@ -112,7 +112,7 @@
   <insert id="insert" parameterType="org.taotao.pojo.TbItemDesc" >
     insert into tb_item_desc (item_id, created, updated, 
       item_desc)
-    values (#{itemId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, 
+    values (#{itemId,jdbcType=BIGINT}, NOW(), NOW(),
       #{itemDesc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbItemDesc" >
@@ -136,10 +136,10 @@
         #{itemId,jdbcType=BIGINT},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+       NOW(),
       </if>
       <if test="itemDesc != null" >
         #{itemDesc,jdbcType=LONGVARCHAR},
@@ -157,12 +157,9 @@
     <set >
       <if test="record.itemId != null" >
         item_id = #{record.itemId,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
       <if test="record.itemDesc != null" >
         item_desc = #{record.itemDesc,jdbcType=LONGVARCHAR},
@@ -174,8 +171,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update tb_item_desc
-    set item_id = #{record.itemId,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
+    set item_id = #{record.itemId,jdbcType=BIGINT}, 
       updated = #{record.updated,jdbcType=TIMESTAMP},
       item_desc = #{record.itemDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -184,9 +180,8 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update tb_item_desc
-    set item_id = #{record.itemId,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+    set item_id = #{record.itemId,jdbcType=BIGINT}, 
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

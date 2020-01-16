@@ -105,6 +105,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+<!--   #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP} -->
   <insert id="insert" parameterType="org.taotao.pojo.TbItem" >
     insert into tb_item (id, title, sell_point, 
       price, num, barcode, 
@@ -113,7 +114,7 @@
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{sellPoint,jdbcType=VARCHAR}, 
       #{price,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR}, 
       #{image,jdbcType=VARCHAR}, #{cid,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
-      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+     NOW(),NOW() )
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbItem" >
     insert into tb_item
@@ -181,10 +182,10 @@
         #{status,jdbcType=TINYINT},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
     </trim>
   </insert>
@@ -224,11 +225,11 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=TINYINT},
       </if>
-      <if test="record.created != null" >
+<!--       <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> -->
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     <if test="_parameter != null" >
@@ -246,8 +247,8 @@
       image = #{record.image,jdbcType=VARCHAR},
       cid = #{record.cid,jdbcType=BIGINT},
       status = #{record.status,jdbcType=TINYINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+ <!--      created = #{record.created,jdbcType=TIMESTAMP}, -->
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -279,11 +280,11 @@
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="created != null" >
+<!--       <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
-      </if>
+      </if> -->
       <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -298,8 +299,7 @@
       image = #{image,jdbcType=VARCHAR},
       cid = #{cid,jdbcType=BIGINT},
       status = #{status,jdbcType=TINYINT},
-      created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    where id = NOW()
   </update>
 </mapper>

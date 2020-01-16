@@ -110,7 +110,7 @@
       )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, 
       #{itemTitle,jdbcType=VARCHAR}, #{itemImage,jdbcType=VARCHAR}, #{itemPrice,jdbcType=BIGINT}, 
-      #{num,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}
+      #{num,jdbcType=INTEGER}, NOW(),NOW()
       )
   </insert>
   <insert id="insertSelective" parameterType="org.taotao.pojo.TbCart" >
@@ -167,10 +167,10 @@
         #{num,jdbcType=INTEGER},
       </if>
       <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
     </trim>
   </insert>
@@ -203,12 +203,9 @@
       </if>
       <if test="record.num != null" >
         num = #{record.num,jdbcType=INTEGER},
-      </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="record.updated != null" >
-        updated = #{record.updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     <if test="_parameter != null" >
@@ -223,9 +220,8 @@
       item_title = #{record.itemTitle,jdbcType=VARCHAR},
       item_image = #{record.itemImage,jdbcType=VARCHAR},
       item_price = #{record.itemPrice,jdbcType=BIGINT},
-      num = #{record.num,jdbcType=INTEGER},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      updated = #{record.updated,jdbcType=TIMESTAMP}
+      num = #{record.num,jdbcType=INTEGER}, 
+      updated = NOW()
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -250,12 +246,9 @@
       </if>
       <if test="num != null" >
         num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
+      </if> 
       <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
+        updated = NOW(),
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -267,9 +260,8 @@
       item_title = #{itemTitle,jdbcType=VARCHAR},
       item_image = #{itemImage,jdbcType=VARCHAR},
       item_price = #{itemPrice,jdbcType=BIGINT},
-      num = #{num,jdbcType=INTEGER},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
+      num = #{num,jdbcType=INTEGER}, 
+      updated = NOW()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
